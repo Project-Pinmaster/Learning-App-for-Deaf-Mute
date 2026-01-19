@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}SignMate - Master Sign Language{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column vh-100 bg-light">
+
+  <!-- Hero Section -->
+  <section class="flex-grow-1 d-flex align-items-center justify-content-center position-relative overflow-hidden">
+
+    <!-- Background Decoration (Optional) -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="z-index: 0; opacity: 0.4;">
+      <div class="position-absolute top-0 start-50 translate-middle rounded-circle"
+        style="width: 800px; height: 800px; background: radial-gradient(circle, rgba(102,126,234,0.2) 0%, rgba(255,255,255,0) 70%);">
+      </div>
+    </div>
+
+    <div class="container text-center position-relative" style="z-index: 1;">
+
+      <div class="animate-fade-in">
+        <h1 class="display-2 fw-bold mb-4">
+          Welcome to <span class="text-gradient">SignMate</span>
+        </h1>
+
+        <p class="lead text-muted mb-5 col-lg-8 mx-auto" style="font-size: 1.25rem;">
+          The interactive way to master Sign Language. <br>
+          Bridge the communication gap with gamified lessons, visual dictionaries, and real-time practice tools.
+        </p>
+
+        <div class="d-flex justify-content-center gap-3">
+          <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg shadow-lg">
+            Continue Learning
+          </a>
+          <a href="{{ url_for('register') }}" class="btn btn-outline-secondary btn-lg">
+            Start for Free
+          </a>
+        </div>
+      </div>
+
+      <!-- Features Grid (Optional additional visual) -->
+      <div class="row mt-5 pt-5 g-4 animate-fade-in" style="animation-delay: 0.2s;">
+        <div class="col-md-4">
+          <div class="card p-4 border-0 shadow-sm h-100 hover-effect">
+            <div class="mb-3 text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                class="bi bi-camera-video" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.461a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556v4.35zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H2z" />
+              </svg>
+            </div>
+            <h5 class="fw-bold">Real-time Translation</h5>
+            <p class="text-muted small">Translate sign language gestures to text instantly using your camera.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-4 border-0 shadow-sm h-100 hover-effect">
+            <div class="mb-3 text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                class="bi bi-journal-text" viewBox="0 0 16 16">
+                <path
+                  d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+                <path
+                  d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                <path
+                  d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+              </svg>
+            </div>
+            <h5 class="fw-bold">Interactive Lessons</h5>
+            <p class="text-muted small">Learn at your own pace with curated lessons and quizzes.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-4 border-0 shadow-sm h-100 hover-effect">
+            <div class="mb-3 text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-people"
+                viewBox="0 0 16 16">
+                <path
+                  d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.176.593.69.758 1.457.76 1.72a.286.286 0 0 1-.286.277c-.531 0-1.29-.028-1.7-.101-.39-.069-.746-.205-1.071-.345l-.475-.202-.465.195c-.326.137-.683.273-1.08.345-.42.077-1.2.106-1.78.106-.583 0-1.428-.027-1.874-.099a2.766 2.766 0 0 1-.502-.154z" />
+                <path
+                  d="M4.318 6.318a4.5 4.5 0 0 0 0 6.364L1.228 15H0v-1l3.125-3.125a3.501 3.501 0 0 1 0-4.95l1.193-1.193z" />
+                <path
+                  d="M9.5 6a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM8 4a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM13.5 6a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zM12 4a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM4 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
+              </svg>
+            </div>
+            <h5 class="fw-bold">Community</h5>
+            <p class="text-muted small">Connect with other learners and practice together.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="py-4 bg-white border-top">
+    <div class="container text-center">
+      <span class="text-muted small">© 2025 SignMate Learning Platform</span>
+    </div>
+  </footer>
+</div>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}SignMate - Translation{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg fixed-top m-3"
+    style="background: var(--glass-bg); backdrop-filter: blur(10px); z-index: 1000; border: 1px solid white;">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+            <span class="fw-bold text-gradient fs-4">SignMate</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="dashNav">
+            <ul class="navbar-nav mx-auto bg-light rounded-pill px-3 py-1 shadow-sm mt-2 mt-lg-0">
+                <li class="nav-item"><a class="nav-link px-3 fw-medium text-muted"
+                        href="{{ url_for('handicap') }}">Overview</a></li>
+                <li class="nav-item"><a class="nav-link px-3 fw-bold text-primary active"
+                        href="{{ url_for('translation') }}">Translation</a></li>
+                <li class="nav-item"><a class="nav-link px-3 fw-medium text-muted" href="#">Lessons</a></li>
+                <li class="nav-item"><a class="nav-link px-3 fw-medium text-muted" href="#">Practice</a></li>
+            </ul>
+
+            <div class="d-flex align-items-center mt-3 mt-lg-0">
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary border-0 dropdown-toggle d-flex align-items-center gap-2"
+                        type="button" data-bs-toggle="dropdown">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 32px; height: 32px; font-size: 0.8rem;">
+                            {{ user[0] if user else 'U' }}
+                        </div>
+                        <span class="small fw-bold">{{ user }}</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0">
+                        <li><a class="dropdown-item small" href="#">Profile</a></li>
+                        <li><a class="dropdown-item small" href="#">Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item small text-danger" href="{{ url_for('login') }}">Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid pt-5 mt-5 h-100">
+    <div class="row g-4 h-100">
+
+        <div class="col-lg-8">
+            <div class="card bg-black border-0 shadow-lg overflow-hidden h-100"
+                style="border-radius: var(--radius-xl);">
+                <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center position-absolute w-100 p-4"
+                    style="z-index: 10; background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="spinner-grow text-danger spinner-grow-sm" role="status"></div>
+                        <span class="text-white small fw-bold tracking-wide">LIVE FEED</span>
+                    </div>
+                    <button class="btn btn-sm btn-dark bg-opacity-50 border-0 rounded-pill px-3 backdrop-blur">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-gear-fill me-1" viewBox="0 0 16 16">
+                            <path
+                                d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34z" />
+                            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                        </svg>
+                        Settings
+                    </button>
+                </div>
+
+                <div class="card-body p-0 d-flex align-items-center justify-content-center"
+                    style="height: 75vh; background: #111;">
+                    <div class="text-white-50 text-center animate-pulse">
+                        <div class="bg-dark rounded-circle d-inline-flex p-4 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
+                                class="bi bi-camera-video-off" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M10.961 12.365a1.99 1.99 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l6.69 9.365zm-10.114-9A2.001 2.001 0 0 0 0 5v6a2 2 0 0 0 2 2h5.728L2.1 4.1 1.1 5.1a1 1 0 0 1-1.4 0l-.35-.35a1 1 0 0 1 0-1.4l1.4-1.4a1 1 0 0 1 1.4 0zM11.293 0h1.414l-9 9a1 1 0 0 1-1.414 0l-9-9 1-1.414H11.293z" />
+
+                                <path fill-rule="evenodd"
+                                    d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.461a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556v4.35zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H2z" />
+                            </svg>
+                        </div>
+                        <p class="font-monospace small ls-1">Searching for camera input...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-lg h-100 d-flex flex-column"
+                style="border-radius: var(--radius-xl); background: var(--card-bg);">
+                <div class="card-header bg-white border-0 py-4 px-4 sticky-top rounded-top-xl">
+                    <h5 class="fw-bold mb-1 text-dark">Real-time Translation</h5>
+                    <p class="text-muted small mb-0">AI Detected Gestures</p>
+                </div>
+
+                <div class="card-body p-0 flex-grow-1" style="background-color: #f9fafb; overflow-y: auto;">
+                    <div class="p-4 d-flex flex-column gap-3" id="output-content">
+                        <div class="text-center py-5 text-muted">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
+                                class="bi bi-chat-square-dots opacity-25 mb-3" viewBox="0 0 16 16">
+                                <path
+                                    d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5l3.362 4.483a1 1 0 0 0 1.276 0L10.5 12H13a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                <path
+                                    d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                            </svg>
+                            <p class="small fw-medium">Start signing to see translation</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card-footer bg-white border-top p-3 rounded-bottom-xl">
+                    <div class="d-grid">
+                        <button class="btn btn-outline-danger btn-sm rounded-pill fw-bold">
+                            Clear History
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
