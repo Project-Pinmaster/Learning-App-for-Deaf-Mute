@@ -1,0 +1,130 @@
+:host {
+  display: block;
+}
+
+.settings-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #4da8da 0%, #80d8c3 52%, #f5f5f5 100%);
+  padding: 48px 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.floating {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.float {
+  position: absolute;
+  width: 96px;
+  opacity: 0.5;
+  animation: drift 7s ease-in-out infinite;
+  filter: drop-shadow(0 12px 22px rgba(23, 48, 69, 0.18));
+}
+
+.float.f1 { top: 6%; left: 8%; animation-delay: 0s; }
+.float.f2 { top: 10%; right: 10%; animation-delay: 1s; }
+.float.f3 { bottom: 20%; left: 10%; animation-delay: 2s; }
+.float.f4 { bottom: 12%; right: 12%; animation-delay: 3s; }
+.float.f5 { top: 42%; left: 16%; animation-delay: 4s; }
+.float.f6 { top: 40%; right: 18%; animation-delay: 5s; }
+
+@keyframes drift {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-24px) rotate(4deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.card-shell {
+  width: min(560px, 88vw);
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 22px 22px 18px;
+  box-shadow: 0 26px 60px rgba(23, 48, 69, 0.22);
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 18px;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.settings-header p {
+  margin: 0;
+  color: #4b6b7d;
+}
+
+.ghost {
+  border: 1px solid #80d8c3;
+  background: transparent;
+  color: #2f6f68;
+  padding: 10px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: inset 0 0 0 1px #eef5f7;
+  display: grid;
+  gap: 10px;
+}
+
+.card h2 {
+  margin: 0;
+}
+
+label {
+  font-size: 0.85rem;
+  color: #4b6b7d;
+}
+
+input {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #c7e7f0;
+}
+
+.primary {
+  border: none;
+  background: #4da8da;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary.alt {
+  background: #80d8c3;
+  color: #0d3c3c;
+}
+
+.message {
+  background: rgba(128, 216, 195, 0.25);
+  border-left: 4px solid #80d8c3;
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: #2f6f68;
+}
+
+.error {
+  background: rgba(255, 214, 107, 0.25);
+  border-left: 4px solid #ffd66b;
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: #7a4f00;
+}

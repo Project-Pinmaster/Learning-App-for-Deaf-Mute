@@ -1,0 +1,48 @@
+<main class="settings-page">
+  <div class="floating" aria-hidden="true">
+    <img src="/images/flying-img1.png" alt="" class="float f1" />
+    <img src="/images/flying-img2.png" alt="" class="float f2" />
+    <img src="/images/flying-img3.png" alt="" class="float f3" />
+    <img src="/images/flying-img4.png" alt="" class="float f4" />
+    <img src="/images/flying-img5.png" alt="" class="float f5" />
+    <img src="/images/flying-img6.png" alt="" class="float f6" />
+  </div>
+
+  <section class="card-shell">
+    <header class="settings-header">
+      <div>
+        <h1>Settings</h1>
+        <p>Manage your account details securely.</p>
+      </div>
+      <button type="button" class="ghost" (click)="backToProfile()">Back to Profile</button>
+    </header>
+
+    <p class="message" *ngIf="message()">{{ message() }}</p>
+    <p class="error" *ngIf="error()">{{ error() }}</p>
+
+    <section class="card">
+      <h2>Change Email</h2>
+      <label>New Email</label>
+      <input type="email" [ngModel]="email()" (ngModelChange)="email.set($event)" placeholder="name@example.com" />
+      <button type="button" class="primary" (click)="updateEmail()">Update Email</button>
+    </section>
+
+    <section class="card">
+      <h2>Change Username</h2>
+      <label>New Full Name</label>
+      <input type="text" [ngModel]="fullName()" (ngModelChange)="fullName.set($event)" placeholder="Your name" />
+      <button type="button" class="primary alt" (click)="updateName()">Update Name</button>
+    </section>
+
+    <section class="card">
+      <h2>Change Password</h2>
+      <label>Current Password</label>
+      <input type="password" [ngModel]="currentPassword()" (ngModelChange)="currentPassword.set($event)" />
+      <label>New Password</label>
+      <input type="password" [ngModel]="newPassword()" (ngModelChange)="newPassword.set($event)" />
+      <label>Confirm New Password</label>
+      <input type="password" [ngModel]="confirmPassword()" (ngModelChange)="confirmPassword.set($event)" />
+      <button type="button" class="primary" (click)="updatePassword()">Update Password</button>
+    </section>
+  </section>
+</main>

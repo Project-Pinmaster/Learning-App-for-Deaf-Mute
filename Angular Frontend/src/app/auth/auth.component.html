@@ -1,0 +1,192 @@
+﻿<main class="auth-page">
+  <div class="floating" aria-hidden="true">
+    <img
+      *ngFor="let img of floatingImages(); let i = index"
+      [src]="img"
+      alt=""
+      class="float"
+      [ngClass]="'f' + (i + 1)"
+    />
+  </div>
+
+  <section class="card" aria-live="polite">
+    <div class="tabs">
+      <button
+        type="button"
+        class="tab"
+        [ngClass]="{ active: mode() === 'login' }"
+        (click)="setMode('login')"
+      >
+        Login
+      </button>
+      <button
+        type="button"
+        class="tab"
+        [ngClass]="{ active: mode() === 'register' }"
+        (click)="setMode('register')"
+      >
+        Register
+      </button>
+    </div>
+
+    <div class="panel" [ngClass]="{ show: mode() === 'login' }">
+      <form (ngSubmit)="onLogin()">
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@dweep.com" [(ngModel)]="loginEmail" name="loginEmail" />
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" placeholder="Enter your password" [(ngModel)]="loginPassword" name="loginPassword" />
+        </div>
+
+        <div class="field">
+          <label>User Type</label>
+          <div class="toggle">
+            <button
+              type="button"
+              [ngClass]="{ active: userType() === 'normal' }"
+              (click)="setUserType('normal')"
+            >
+              Normal
+            </button>
+            <button
+              type="button"
+              [ngClass]="{ active: userType() === 'handicap' }"
+              (click)="setUserType('handicap')"
+            >
+              Handicap
+            </button>
+          </div>
+        </div>
+
+        <div class="field" *ngIf="userType() === 'handicap'">
+          <label>Handicap Type</label>
+          <div class="toggle triple">
+            <button
+              type="button"
+              [ngClass]="{ active: handicapType() === 'deaf' }"
+              (click)="setHandicapType('deaf')"
+            >
+              Deaf
+            </button>
+            <button
+              type="button"
+              [ngClass]="{ active: handicapType() === 'mute' }"
+              (click)="setHandicapType('mute')"
+            >
+              Mute
+            </button>
+            <button
+              type="button"
+              [ngClass]="{ active: handicapType() === 'both' }"
+              (click)="setHandicapType('both')"
+            >
+              Both
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="check">
+            <input type="checkbox" />
+            Remember me
+          </label>
+          <button class="link" type="button">Forgot password?</button>
+        </div>
+        <button class="primary" type="submit">Sign In</button>
+      </form>
+
+      <p class="error" *ngIf="errorMessage() && errorScope() === 'login'">{{ errorMessage() }}</p>
+
+      <div class="divider">Or continue with</div>
+      <div class="socials">
+        <button type="button">Google</button>
+        <button type="button">Microsoft</button>
+      </div>
+    </div>
+
+    <div class="panel" [ngClass]="{ show: mode() === 'register' }">
+      <form (ngSubmit)="onRegister()">
+        <div class="field">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your name" [(ngModel)]="registerName" name="registerName" />
+        </div>
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@dweep.com" [(ngModel)]="registerEmail" name="registerEmail" />
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" placeholder="Create a password" [(ngModel)]="registerPassword" name="registerPassword" />
+        </div>
+        <div class="field">
+          <label>Confirm Password</label>
+          <input type="password" placeholder="Repeat your password" [(ngModel)]="registerConfirm" name="registerConfirm" />
+        </div>
+
+        <div class="field">
+          <label>User Type</label>
+          <div class="toggle">
+            <button
+              type="button"
+              [ngClass]="{ active: userType() === 'normal' }"
+              (click)="setUserType('normal')"
+            >
+              Normal
+            </button>
+            <button
+              type="button"
+              [ngClass]="{ active: userType() === 'handicap' }"
+              (click)="setUserType('handicap')"
+            >
+              Handicap
+            </button>
+          </div>
+        </div>
+
+        <div class="field" *ngIf="userType() === 'handicap'">
+          <label>Handicap Type</label>
+          <div class="toggle triple">
+            <button
+              type="button"
+              [ngClass]="{ active: handicapType() === 'deaf' }"
+              (click)="setHandicapType('deaf')"
+            >
+              Deaf
+            </button>
+            <button
+              type="button"
+              [ngClass]="{ active: handicapType() === 'mute' }"
+              (click)="setHandicapType('mute')"
+            >
+              Mute
+            </button>
+            <button
+              type="button"
+              [ngClass]="{ active: handicapType() === 'both' }"
+              (click)="setHandicapType('both')"
+            >
+              Both
+            </button>
+          </div>
+        </div>
+
+        <button class="primary" type="submit">Create Account</button>
+      </form>
+
+      <p class="error" *ngIf="errorMessage() && errorScope() === 'register'">{{ errorMessage() }}</p>
+
+      <div class="divider">Or continue with</div>
+      <div class="socials">
+        <button type="button">Google</button>
+        <button type="button">Microsoft</button>
+      </div>
+    </div>
+
+    <p class="fine">
+      By signing in you agree to our Terms of Service and acknowledge the
+      Privacy Policy.
+    </p>
+  </section>
+</main>

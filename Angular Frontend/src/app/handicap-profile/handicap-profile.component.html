@@ -1,0 +1,124 @@
+﻿<section class="page">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-name">SignBuddy</span>
+    </div>
+    <nav class="nav-tabs">
+      <button class="active" type="button">Overview</button>
+      <button type="button">Translation</button>
+      <button type="button">Lessons</button>
+    </nav>
+    <div class="profile">
+      <button class="profile-btn" type="button" (click)="toggleMenu()">
+        <img class="avatar-img" src="/images/people.png" alt="User avatar" />
+        <span class="caret">▾</span>
+      </button>
+      <div class="menu" *ngIf="menuOpen()">
+        <button type="button" (click)="goToHowItWorks()">User Manual</button>
+        <button type="button" (click)="goToSettings()">Settings</button>
+        <button type="button" class="danger" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>Hello, {{ fullName() }}!</h1>
+      <p>Ready to continue your sign language journey?</p>
+    </div>
+    <div class="hero-card">
+      <h3>Progress</h3>
+      <p>{{ progress()?.progressPercentage ?? 0 }}% completed</p>
+      <div class="progress">
+        <span [style.width.%]="progress()?.progressPercentage ?? 0"></span>
+      </div>
+      <small>{{ progress()?.lessonsCompletedCount ?? 0 }} lessons finished</small>
+    </div>
+  </section>
+
+  <section class="quick-actions">
+    <div class="quick-header">
+      <div>
+        <h2>Quick Actions</h2>
+        <p>Jump straight to the tools you use most.</p>
+      </div>
+    </div>
+    <div class="quick-grid">
+      <article class="quick-card">
+        <div class="quick-icon teal">🎥</div>
+        <div class="quick-content">
+          <h3>Start Translation</h3>
+          <p>Open live camera translation instantly.</p>
+        </div>
+        <button type="button" class="quick-cta">Start Translation</button>
+      </article>
+      <article class="quick-card alt">
+        <div class="quick-icon sun">💬</div>
+        <div class="quick-content">
+          <h3>Quick Messages</h3>
+          <p>Use prebuilt phrases for fast chats.</p>
+        </div>
+        <button type="button" class="quick-cta">Quick Messages</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="stats">
+    <article class="stat-card">
+      <div class="stat-icon teal">⏱</div>
+      <div>
+        <span class="label">Practice Words</span>
+        <h3>{{ progress()?.practiceWords?.length ?? 0 }}</h3>
+      </div>
+    </article>
+
+    <article class="stat-card">
+      <div class="stat-icon blue">✓</div>
+      <div>
+        <span class="label">Lessons Completed</span>
+        <h3>{{ progress()?.lessonsCompletedCount ?? 0 }}</h3>
+        <p>You’re making great progress!</p>
+      </div>
+    </article>
+
+    <article class="stat-card">
+      <div class="stat-icon sun">★</div>
+      <div>
+        <span class="label">Current Lesson</span>
+        <h3>{{ progress()?.currentLesson ?? 'Not started' }}</h3>
+      </div>
+    </article>
+  </section>
+
+  <section class="section">
+    <h2>What did you learn today?</h2>
+    <div class="learn-grid">
+      <article>
+        <h4>New Signs</h4>
+        <p>Track the words you practiced today.</p>
+      </article>
+      <article>
+        <h4>Practice Words</h4>
+        <p>{{ (progress()?.practiceWords ?? []).join(', ') || 'No words yet' }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Recent Activity</h2>
+    <div class="activity-grid">
+      <article>
+        <h4>Translation Session</h4>
+        <p>Last lesson accessed: {{ progress()?.lastLessonAccessed || 'Not yet' }}</p>
+      </article>
+      <article>
+        <h4>Lesson Review</h4>
+        <p>Completed lessons: {{ progress()?.lessonsCompletedCount ?? 0 }}</p>
+      </article>
+      <article>
+        <h4>Current Lesson</h4>
+        <p>{{ progress()?.currentLesson ?? 'No lesson selected' }}</p>
+      </article>
+    </div>
+  </section>
+</section>

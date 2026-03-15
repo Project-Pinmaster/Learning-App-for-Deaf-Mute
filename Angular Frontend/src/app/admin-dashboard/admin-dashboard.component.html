@@ -1,0 +1,127 @@
+<section class="admin-page">
+  <header class="admin-header">
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>Monitor user growth, learning progress, and platform activity.</p>
+    </div>
+    <button type="button" class="ghost" (click)="reload()">Refresh</button>
+  </header>
+
+  <p class="error" *ngIf="error()">{{ error() }}</p>
+
+  <section class="stat-grid">
+    <article class="stat-card">
+      <span class="stat-label">Total Users</span>
+      <strong>{{ summary().totalUsers }}</strong>
+      <small>{{ summary().activeUsers }} active recently</small>
+    </article>
+    <article class="stat-card teal">
+      <span class="stat-label">Handicap Users</span>
+      <strong>{{ summary().totalHandicap }}</strong>
+      <small>{{ summary().totalNormal }} normal users</small>
+    </article>
+    <article class="stat-card sun">
+      <span class="stat-label">Lessons Available</span>
+      <strong>{{ summary().totalLessons }}</strong>
+      <small>{{ summary().activeLearners }} active learners</small>
+    </article>
+    <article class="stat-card">
+      <span class="stat-label">Avg Lessons / User</span>
+      <strong>{{ summary().averageLessonsCompleted | number:'1.0-1' }}</strong>
+      <small>{{ summary().totalCompletedLessons }} lessons completed</small>
+    </article>
+  </section>
+
+  <section class="filters">
+    <div>
+      <label>User Type</label>
+      <select [ngModel]="userTypeFilter()" (ngModelChange)="userTypeFilter.set($event)">
+        <option value="all">All</option>
+        <option value="handicap">Handicap</option>
+        <option value="normal">Normal</option>
+      </select>
+    </div>
+    <div>
+      <label>Activity</label>
+      <select [ngModel]="activityFilter()" (ngModelChange)="activityFilter.set($event)">
+        <option value="all">All</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    </div>
+    <div>
+      <label>Progress</label>
+      <select [ngModel]="progressFilter()" (ngModelChange)="progressFilter.set($event)">
+        <option value="all">All</option>
+        <option value="0-25">0 - 25%</option>
+        <option value="26-50">26 - 50%</option>
+        <option value="51-75">51 - 75%</option>
+        <option value="76-100">76 - 100%</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="charts">
+    <article class="chart-card">
+      <h3>Lesson Completion Rate</h3>
+      <div class="bar">
+        <span [style.width.%]="charts().completionRate"></span>
+      </div>
+      <p>{{ charts().completionRate }}% average completion</p>
+    </article>
+    <article class="chart-card">
+      <h3>Active Users (Last 7 Days)</h3>
+      <div class="spark">
+        <div
+          *ngFor="let point of charts().activeUsersSeries"
+          class="spark-bar"
+          [style.height.%]="point.count * 10 + 10"
+          [title]="point.label + ': ' + point.count"
+        ></div>
+      </div>
+    </article>
+    <article class="chart-card">
+      <h3>Progress Distribution</h3>
+      <div class="donut">
+        <div
+          *ngFor="let slice of charts().progressDistribution"
+          class="donut-slice"
+        >
+          <span>{{ slice.label }}</span>
+          <strong>{{ slice.count }}</strong>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="table-card">
+    <div class="table-head">
+      <h2>User Progress Table</h2>
+      <span>{{ filteredUsers().length }} users</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>User Type</th>
+          <th>Lessons Completed</th>
+          <th>Progress %</th>
+          <th>Last Login</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers(); trackBy: trackById">
+          <td>{{ user.fullName }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <span class="tag" [ngClass]="user.userType">{{ user.userType }}</span>
+          </td>
+          <td>{{ user.lessonsCompleted }}</td>
+          <td>{{ user.progressPercentage }}%</td>
+          <td>{{ user.lastLoginAt ? (user.lastLoginAt | date:'mediumDate') : '—' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>

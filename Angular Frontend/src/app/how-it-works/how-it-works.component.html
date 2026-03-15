@@ -1,0 +1,149 @@
+﻿<main class="page">
+  <header class="nav-shell">
+    <nav class="nav container">
+      <div class="logo">
+        <img class="logo-icon" src="/images/logo.png" alt="SignBuddy logo" />
+        <span class="logo-text">SignBuddy</span>
+      </div>
+      <div class="nav-links">
+        <a routerLink="/">Home</a>
+        <a class="active" routerLink="/how-it-works">How it works</a>
+      </div>
+      <button class="btn small nav-btn">Get in touch</button>
+    </nav>
+  </header>
+
+  <section class="hero container">
+    <div>
+      <p class="eyebrow">How it works</p>
+      <h1>Two-way communication for Deaf, Mute, and normal users.</h1>
+      <p class="lead">
+        SignBuddy supports both directions: sign-to-text-to-voice for the listener,
+        and voice-to-text for the Deaf or Mute user to read. Everything happens
+        inside the browser.
+      </p>
+    </div>
+    <div class="flow-card">
+      <div>
+        <span class="badge">1</span>
+        <h3>Capture sign or voice</h3>
+      </div>
+      <div>
+        <span class="badge">2</span>
+        <h3>Translate into clear text</h3>
+      </div>
+      <div>
+        <span class="badge">3</span>
+        <h3>Speak or display the result</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo container">
+    <div class="demo-block">
+      <div class="demo-title">
+        <span class="chip">Deaf/Mute → Normal</span>
+        <h2>Sign input becomes voice output</h2>
+      </div>
+      <div class="demo-grid">
+        <div class="video-card">
+          <div class="video-header">
+            <strong>Sign input</strong>
+            <span>Live camera view</span>
+          </div>
+          <div class="video-frame">
+            <video controls muted>
+              <source
+                src="https://upload.wikimedia.org/wikipedia/commons/f/fc/WIKITONGUES-_Eetu_signing_Finnish_Sign_Language.webm"
+                type="video/webm"
+              />
+              Your browser does not support the video tag.
+            </video>
+            <div class="overlay-caption">Translating: “I want to learn.” → Voice output</div>
+          </div>
+          <p class="hint">Demo footage is muted by default. You can unmute anytime.</p>
+        </div>
+
+        <div class="chat-panel">
+          <div class="chat-header">
+            <strong>Translated chat</strong>
+            <span>Real-time text output</span>
+          </div>
+          <div class="chat-body">
+            <div class="bubble user">Hello! I want to learn sign language.</div>
+            <div class="bubble system">Translation: “Hello! I want to learn sign language.”</div>
+            <div class="bubble user">How do I start?</div>
+          </div>
+          <div class="voice-flow">
+            <div class="voice-icon">🔊</div>
+            <div class="wave"></div>
+            <span>Text-to-speech output for the listener</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <div class="demo-title">
+        <span class="chip">Normal → Deaf/Mute</span>
+        <h2>Voice input becomes on-screen text</h2>
+      </div>
+      <div class="demo-grid">
+        <div class="video-card">
+          <div class="video-header">
+            <strong>Voice input</strong>
+            <span>Normal user speaking</span>
+          </div>
+          <div class="video-frame">
+            <video controls muted>
+              <source
+                src="https://upload.wikimedia.org/wikipedia/commons/2/20/WIKITONGUES-_Yernur_speaking_Kazakh.webm"
+                type="video/webm"
+              />
+              Your browser does not support the video tag.
+            </video>
+            <div class="overlay-caption">Listening → Text appears in chat</div>
+          </div>
+          <p class="hint">Voice input is captured and converted to text instantly.</p>
+        </div>
+
+        <div class="chat-panel">
+          <div class="chat-header">
+            <strong>Live captions</strong>
+            <span>Voice-to-text output</span>
+          </div>
+          <div class="chat-body">
+            <div class="bubble system">Voice detected: “Can we meet after class?”</div>
+            <div class="bubble user">Sure, I’ll be there at 4 pm.</div>
+          </div>
+          <div class="voice-flow">
+            <div class="voice-icon">📝</div>
+            <div class="wave"></div>
+            <span>Captions appear for the Deaf or Mute user</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps container">
+    <div>
+      <h2>What happens in the background</h2>
+      <p>
+        The app detects hand landmarks, classifies the sign with the trained
+        model, and instantly converts it into English text. Voice input is
+        transcribed into text for the Deaf or Mute user. Training data comes
+        from online sign language datasets that support the learning modules.
+      </p>
+    </div>
+    <ul>
+      <li>Video capture identifies hand movements in real time.</li>
+      <li>Gesture model maps signs to English text.</li>
+      <li>Speech output reads translated text aloud for listeners.</li>
+    </ul>
+  </section>
+
+  <footer class="footer container">
+    <p>© 2026 SignBuddy Learning Platform. All rights reserved.</p>
+  </footer>
+</main>

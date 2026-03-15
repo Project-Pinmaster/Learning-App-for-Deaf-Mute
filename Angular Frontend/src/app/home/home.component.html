@@ -1,0 +1,131 @@
+﻿<main class="page">
+  <header class="nav-shell">
+    <nav class="nav container">
+      <div class="logo">
+        <img class="logo-icon" src="/images/logo.png" alt="SignBuddy logo" />
+        <span class="logo-text">SignBuddy</span>
+      </div>
+      <div class="nav-links">
+        <a class="active" routerLink="/">Home</a>
+        <a href="#features">Features</a>
+        <a routerLink="/how-it-works">How it works</a>
+      </div>
+      <button class="btn small nav-btn" routerLink="/auth" [queryParams]="{ mode: 'register' }">Get in touch</button>
+    </nav>
+  </header>
+
+  <section class="hero container">
+    <div class="hero-text">
+      <p class="pill">Inclusive learning for everyone</p>
+      <h1>Learn sign language with a friendly, guided experience.</h1>
+      <p class="lead">
+        Build confidence with real-time translation practice, focused lessons,
+        and community support designed for Deaf and Mute learners.
+      </p>
+      <div class="cta">
+        <button class="btn primary" routerLink="/auth" [queryParams]="{ mode: 'register' }">Start learning</button>
+        <button class="btn ghost">View modules</button>
+      </div>
+      <div class="hero-metrics">
+        <div>
+          <strong>24/7</strong>
+          <span>Accessible practice</span>
+        </div>
+        <div>
+          <strong>100%</strong>
+          <span>Browser based</span>
+        </div>
+        <div>
+          <strong>Online datasets</strong>
+          <span>Training-ready content</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-media">
+      <video autoplay muted loop playsinline preload="auto" controls>
+        <source src="/videos/home%20video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-badge">
+        <span class="badge-title">Live practice</span>
+        <span class="badge-text">Camera ready learning spaces</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="banner container" aria-label="Highlight">
+    <p>
+      Build stronger connections with guided lessons, community mentors, and
+      real-time translation tools that keep communication clear.
+    </p>
+    <button class="btn small" routerLink="/auth" [queryParams]="{ mode: 'register' }">Explore programs</button>
+  </section>
+
+  <section class="features container" id="features">
+    <header>
+      <p class="eyebrow">Our focus</p>
+      <h2>Tools that make learning feel natural.</h2>
+    </header>
+    <div class="feature-grid">
+      <article class="card">
+        <div class="card-top">
+          <span class="dot blue"></span>
+          <h3>Real-time Translation</h3>
+        </div>
+        <p>Capture sign language gestures and see clean text feedback instantly.</p>
+        <span class="tag">Translator</span>
+      </article>
+      <article class="card">
+        <div class="card-top">
+          <span class="dot teal"></span>
+          <h3>Interactive Lessons</h3>
+        </div>
+        <p>Short practice videos, alphabet drills, and sentence walkthroughs.</p>
+        <span class="tag">Learning</span>
+      </article>
+      <article class="card">
+        <div class="card-top">
+          <span class="dot sun"></span>
+          <h3>Quick Messages</h3>
+        </div>
+        <p>One-tap phrases with voice output for fast everyday conversations.</p>
+        <span class="tag">Connect</span>
+      </article>
+      <article class="card">
+        <div class="card-top">
+          <span class="dot blue"></span>
+          <h3>Progress Tracking</h3>
+        </div>
+        <p>Celebrate streaks and keep an eye on new signs you have mastered.</p>
+        <span class="tag">Growth</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="how-teaser container">
+    <div>
+      <p class="eyebrow">How it works</p>
+      <h2>See the conversation flow in action.</h2>
+      <p>
+        Watch how a Deaf or Mute user signs in front of the camera, the system
+        translates it to text, and a normal user hears the spoken response.
+      </p>
+    </div>
+    <button class="btn ghost" routerLink="/how-it-works">Open demo</button>
+  </section>
+
+  <section class="cta-panel container">
+    <div>
+      <h2>Ready to practice together?</h2>
+      <p>
+        Join a supportive learning space designed to make sign language feel
+        accessible, friendly, and easy to return to every day.
+      </p>
+    </div>
+    <button class="btn primary" routerLink="/auth" [queryParams]="{ mode: 'login' }">Join the program</button>
+  </section>
+
+  <footer class="footer container">
+    <p>© 2026 SignBuddy Learning Platform. All rights reserved.</p>
+  </footer>
+</main>
