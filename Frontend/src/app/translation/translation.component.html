@@ -14,6 +14,7 @@
     <div class="camera-section">
       <div class="camera-feed" [class.active]="isCameraActive()">
         <video #videoElement autoplay playsinline muted></video>
+        <canvas #canvasElement style="display: none;"></canvas>
       </div>
       <div class="camera-controls">
         <button class="primary toggle-btn" (click)="toggleCamera()" [class.danger]="isCameraActive()">
