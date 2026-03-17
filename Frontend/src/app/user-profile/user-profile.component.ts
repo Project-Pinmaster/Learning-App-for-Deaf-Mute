@@ -1,16 +1,16 @@
 ﻿import { Component, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { ProgressService, UserProgress } from '../services/progress.service';
 
 @Component({
-  selector: 'app-handicap-profile',
+  selector: 'app-user-profile',
   standalone: true,
-  imports: [NgIf],
-  templateUrl: './handicap-profile.component.html',
-  styleUrl: './handicap-profile.component.css'
+  imports: [NgIf, RouterModule],
+  templateUrl: './user-profile.component.html',
+  styleUrl: './user-profile.component.css'
 })
-export class HandicapProfileComponent {
+export class UserProfileComponent {
   protected fullName = signal<string>('User');
   protected progress = signal<UserProgress | null>(null);
   protected menuOpen = signal(false);

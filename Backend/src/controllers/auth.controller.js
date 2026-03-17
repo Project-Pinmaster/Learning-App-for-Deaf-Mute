@@ -3,9 +3,28 @@ const UserProgress = require("../models/userProgress.model");
 const generateToken = require("../utils/generateToken");
 
 const registerUser = async (req, res) => {
-  const { fullName, email, password, userType } = req.body;
+  const { fullName, email, password, confirmPassword, userType } = req.body;
 
   try {
+    // Validation
+    if (!fullName || !email || !password || !confirmPassword) {
+      return res.status(400).json({ message: "All fields are required", success: false });
+    }
+
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Passwords do not match", success: false });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({ message: "Password must be at least 6 characters", success: false });
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Invalid email format", success: false });
+    }
+
     const userExists = await User.findOne({ email });
 
     if (userExists) {
@@ -50,6 +69,11 @@ const loginUser = async (req, res) => {
   const { email, password, userType } = req.body;
 
   try {
+    // Validation
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required", success: false });
+    }
+
     const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {

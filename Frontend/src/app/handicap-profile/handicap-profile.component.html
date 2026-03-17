@@ -1,12 +1,12 @@
-﻿<section class="page">
+<section class="page">
   <header class="topbar">
     <div class="brand">
       <span class="brand-name">SignBuddy</span>
     </div>
     <nav class="nav-tabs">
-      <button class="active" type="button">Overview</button>
-      <button type="button">Translation</button>
-      <button type="button">Lessons</button>
+      <button class="active" type="button" routerLink="/handicap-profile">Overview</button>
+      <button type="button" routerLink="/translation">Translation</button>
+      <button type="button" routerLink="/learning">Lessons</button>
     </nav>
     <div class="profile">
       <button class="profile-btn" type="button" (click)="toggleMenu()">
@@ -24,7 +24,7 @@
   <section class="hero">
     <div>
       <h1>Hello, {{ fullName() }}!</h1>
-      <p>Here is your learning summary and quick access tools.</p>
+      <p>Ready to continue your sign language journey?</p>
     </div>
     <div class="hero-card">
       <h3>Progress</h3>
@@ -45,20 +45,20 @@
     </div>
     <div class="quick-grid">
       <article class="quick-card">
-        <div class="quick-icon teal">🎤</div>
+        <div class="quick-icon teal">🎥</div>
         <div class="quick-content">
-          <h3>Voice to Text</h3>
-          <p>Speak naturally and see your words appear instantly.</p>
+          <h3>Start Translation</h3>
+          <p>Open live camera translation instantly.</p>
         </div>
-        <button type="button" class="quick-cta">Voice to Text</button>
+        <button type="button" class="quick-cta" routerLink="/translation">Start Translation</button>
       </article>
       <article class="quick-card alt">
-        <div class="quick-icon sun">📘</div>
+        <div class="quick-icon sun">💬</div>
         <div class="quick-content">
-          <h3>Explore Lessons</h3>
-          <p>Browse structured lessons and build daily progress.</p>
+          <h3>Quick Messages</h3>
+          <p>Use prebuilt phrases for fast chats.</p>
         </div>
-        <button type="button" class="quick-cta">Explore Lessons</button>
+        <button type="button" class="quick-cta" (click)="toggleQuickMessages()">Quick Messages</button>
       </article>
     </div>
   </section>
@@ -77,6 +77,7 @@
       <div>
         <span class="label">Lessons Completed</span>
         <h3>{{ progress()?.lessonsCompletedCount ?? 0 }}</h3>
+        <p>You’re making great progress!</p>
       </div>
     </article>
 
@@ -120,4 +121,26 @@
       </article>
     </div>
   </section>
+
+  <!-- Quick Messages Modal -->
+  <div class="modal-overlay" *ngIf="showQuickMessages()" (click)="closeQuickMessages()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Quick Messages</h2>
+        <button type="button" class="close-btn" (click)="closeQuickMessages()">✕</button>
+      </div>
+      <div class="messages-grid">
+        <button 
+          *ngFor="let msg of quickMessages" 
+          type="button" 
+          class="message-btn"
+          (click)="selectMessage(msg)"
+          title="Click to copy"
+        >
+          <span class="message-icon">{{ msg.icon }}</span>
+          <span class="message-text">{{ msg.text }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </section>

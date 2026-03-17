@@ -1,4 +1,4 @@
-﻿import { Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 import { AuthComponent } from './auth/auth.component';
@@ -8,6 +8,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { adminGuard } from './admin-dashboard/admin.guard';
 import { SettingsComponent } from './settings/settings.component';
 import { authGuard } from './auth/auth.guard';
+import { TranslationComponent } from './translation/translation.component';
+import { LearningComponent } from './learning/learning.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +17,8 @@ export const routes: Routes = [
   { path: 'auth', component: AuthComponent },
   { path: 'handicap-profile', component: HandicapProfileComponent, canActivate: [authGuard] },
   { path: 'user-profile', component: UserProfileComponent, canActivate: [authGuard] },
+  { path: 'translation', component: TranslationComponent, canActivate: [authGuard] },
+  { path: 'learning', component: LearningComponent, canActivate: [authGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
   { path: 'admin', component: AdminDashboardComponent, canActivate: [adminGuard] },
   { path: '**', redirectTo: '' }

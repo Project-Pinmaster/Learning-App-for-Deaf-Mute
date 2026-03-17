@@ -1,0 +1,47 @@
+<section class="page">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-name">SignBuddy</span>
+    </div>
+    <nav class="nav-tabs">
+      <button type="button" routerLink="/user-profile">Dashboard</button>
+      <button class="active" type="button" routerLink="/translation">Translation</button>
+      <button type="button" routerLink="/learning">Lessons</button>
+    </nav>
+  </header>
+
+  <main class="translation-container">
+    <div class="camera-section">
+      <div class="camera-feed" [class.active]="isCameraActive()">
+        <video #videoElement autoplay playsinline muted></video>
+      </div>
+      <div class="camera-controls">
+        <button class="primary toggle-btn" (click)="toggleCamera()" [class.danger]="isCameraActive()">
+          {{ isCameraActive() ? 'Stop Camera' : 'Start Camera' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="output-section">
+      <div class="output-header">
+        <h2>Live Translation</h2>
+        <span class="status-badge" [class.recording]="isCameraActive()">
+          {{ isCameraActive() ? 'Translating...' : 'Ready' }}
+        </span>
+      </div>
+      
+      <div class="text-output">
+        <textarea readonly placeholder="Recognized sign language will appear here...">{{ recognizedText() }}</textarea>
+      </div>
+
+      <div class="action-buttons">
+        <button class="action-btn play-btn" (click)="playAudio()" [disabled]="!recognizedText()">
+          🔊 Play Audio
+        </button>
+        <button class="action-btn clear-btn" (click)="clearText()" [disabled]="!recognizedText()">
+          🗑️ Clear
+        </button>
+      </div>
+    </div>
+  </main>
+</section>

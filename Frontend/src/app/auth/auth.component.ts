@@ -91,13 +91,14 @@ export class AuthComponent {
       })
       .subscribe({
         next: (res) => {
-          if (!res?._id) {
+          if (!res?.success || !res?._id) {
             this.errorMessage.set(res?.message || 'Login failed. Please try again.');
             return;
           }
           localStorage.setItem('userId', res._id);
           localStorage.setItem('fullName', res.fullName);
           localStorage.setItem('userType', res.userType);
+          localStorage.setItem('token', res.token);
           const target = res.userType === 'handicap' ? '/handicap-profile' : '/user-profile';
           this.router.navigate([target]);
         },
@@ -110,8 +111,16 @@ export class AuthComponent {
   protected onRegister() {
     this.errorMessage.set(null);
     this.errorScope.set('register');
+    if (!this.registerName || !this.registerEmail || !this.registerPassword || !this.registerConfirm) {
+      this.errorMessage.set('All fields are required.');
+      return;
+    }
     if (this.registerPassword !== this.registerConfirm) {
       this.errorMessage.set('Passwords do not match.');
+      return;
+    }
+    if (this.registerPassword.length < 6) {
+      this.errorMessage.set('Password must be at least 6 characters.');
       return;
     }
 
@@ -120,17 +129,19 @@ export class AuthComponent {
         fullName: this.registerName,
         email: this.registerEmail,
         password: this.registerPassword,
+        confirmPassword: this.registerConfirm,
         userType: this.userType(),
       })
       .subscribe({
         next: (res) => {
-          if (!res?._id) {
+          if (!res?.success || !res?._id) {
             this.errorMessage.set(res?.message || 'Registration failed. Please try again.');
             return;
           }
           localStorage.setItem('userId', res._id);
           localStorage.setItem('fullName', res.fullName);
           localStorage.setItem('userType', res.userType);
+          localStorage.setItem('token', res.token);
           const target = res.userType === 'handicap' ? '/handicap-profile' : '/user-profile';
           this.router.navigate([target]);
         },
