@@ -1,8 +1,16 @@
-﻿:host {
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+router-outlet {
+  flex: 1 0 auto;
   display: block;
 }
 
 .site-footer {
+  margin-top: auto;
   text-align: center;
   padding: 22px 16px 28px;
   color: #4b6b7d;

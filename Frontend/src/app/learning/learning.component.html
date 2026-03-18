@@ -1,81 +1,109 @@
-<section class="page">
-  <header class="topbar">
-    <div class="brand">
-      <span class="brand-name">SignBuddy</span>
-    </div>
-    <nav class="nav-tabs">
-      <button type="button" routerLink="/user-profile">Dashboard</button>
-      <button type="button" routerLink="/translation">Translation</button>
-      <button class="active" type="button" routerLink="/learning">Lessons</button>
-    </nav>
-  </header>
+<main class="learning-page">
+  <div class="floating" aria-hidden="true">
+    <img
+      *ngFor="let img of floatingImages; let i = index"
+      [src]="img"
+      alt=""
+      class="float"
+      [ngClass]="'f' + (i + 1)"
+    />
+  </div>
 
-  <main class="learning-container" *ngIf="!selectedLesson">
-    <header class="learning-header">
-      <div>
-        <h1>Learning Center</h1>
-        <p>Continue your sign language journey today.</p>
+  <section class="lesson-shell">
+    <header class="topbar">
+      <a class="brand-link" routerLink="/" style="text-decoration: none; color: inherit; display: inline-flex; align-items: center;">
+      <div class="brand">
+        <img class="brand-logo" src="/images/logo.png" alt="SignBuddy logo" />
+        <span class="brand-name">SignBuddy</span>
       </div>
-      <div class="progress-widget">
-        <div class="progress-info">
-          <span>Overall Progress</span>
-          <strong>{{ progressPercentage }}%</strong>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" [style.width.%]="progressPercentage"></div>
-        </div>
-      </div>
+    </a>
+      <nav class="nav-tabs">
+        <button type="button" routerLink="/user-profile">Dashboard</button>
+        <button *ngIf="isHandicapUser" type="button" routerLink="/translation">Translation</button>
+        <button *ngIf="!isHandicapUser" type="button" routerLink="/voice-to-text">Voice to Text</button>
+        <button class="active" type="button" routerLink="/learning">Lessons</button>
+      </nav>
     </header>
 
-    <div class="lessons-grid">
-      <div class="lesson-card" *ngFor="let lesson of lessons" [class.completed]="lesson.completed" (click)="openLesson(lesson)">
-        <div class="card-status">
-          <span class="badge" *ngIf="lesson.completed">✓ Completed</span>
-          <span class="badge pending" *ngIf="!lesson.completed">{{ lesson.duration }}</span>
+    <div class="learning-container" *ngIf="!selectedLesson">
+      <header class="learning-header">
+        <div>
+          <h1>Learning Center</h1>
+          <p>Continue your sign language journey today.</p>
         </div>
-        <div class="card-content">
-          <h3>{{ lesson.title }}</h3>
-          <p>{{ lesson.description }}</p>
+        <div class="progress-widget" [class.loading]="isLoading">
+          <div class="progress-info">
+            <span>Overall Progress</span>
+            <strong *ngIf="!isLoading">{{ progressPercentage }}%</strong>
+            <span class="loading-text" *ngIf="isLoading">Loading...</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="isLoading ? 0 : progressPercentage"></div>
+          </div>
         </div>
-        <div class="card-footer">
-          <button class="btn secondary">
-            {{ lesson.completed ? 'Review Lesson' : 'Start Lesson' }}
-          </button>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <div class="lesson-view-container" *ngIf="selectedLesson">
-    <div class="lesson-view">
-      <header class="lesson-header">
-        <button class="btn back-btn" (click)="closeLesson()">← Back to Lessons</button>
-        <h2>{{ selectedLesson.title }}</h2>
       </header>
-      
-      <div class="lesson-content">
-        <div class="video-placeholder">
-          <span class="play-icon">▶</span>
-          <p>Interactive Lesson Video</p>
-        </div>
-        <div class="lesson-details">
-          <h3>About this lesson</h3>
-          <p>{{ selectedLesson.description }}</p>
-          <div class="lesson-tips">
-             <strong>Pro Tip:</strong> Ensure your hands and face are well-lit and visible to the camera. Open gestures feel more natural.
+
+      <div class="lessons-grid">
+        <div class="lesson-card" *ngFor="let lesson of lessons" [class.completed]="lesson.completed" (click)="openLesson(lesson)">
+          <div class="card-status">
+            <span class="badge" *ngIf="lesson.completed">✓ Completed</span>
+            <span class="badge pending" *ngIf="!lesson.completed">{{ lesson.duration }}</span>
+          </div>
+          <div class="card-content">
+            <h3>{{ lesson.title }}</h3>
+            <p>{{ lesson.description }}</p>
+          </div>
+          <div class="card-footer">
+            <button class="btn secondary">
+              {{ lesson.completed ? 'Review Lesson' : 'Start Lesson' }}
+            </button>
           </div>
         </div>
       </div>
-
-      <footer class="lesson-actions">
-        <button class="btn cancel" (click)="closeLesson()">Close</button>
-        <button class="btn primary" (click)="markCompleted()" *ngIf="!selectedLesson.completed">
-          Mark as Completed
-        </button>
-        <button class="btn success" (click)="closeLesson()" *ngIf="selectedLesson.completed">
-          ✓ Completed
-        </button>
-      </footer>
     </div>
-  </div>
-</section>
+
+    <div class="lesson-view-container" *ngIf="selectedLesson">
+      <div class="lesson-view">
+        <header class="lesson-header">
+          <button class="btn back-btn" (click)="closeLesson()">← Back to Lessons</button>
+          <h2>{{ selectedLesson.title }}</h2>
+        </header>
+
+        <div class="lesson-content">
+          <video class="lesson-video" controls preload="metadata">
+            <source [src]="selectedLesson?.videoUrl" type="video/mp4" />
+            <track
+              kind="captions"
+              [src]="selectedLesson?.captionsUrl"
+              srclang="en"
+              label="English"
+              default
+            />
+            Your browser does not support the video tag.
+          </video>
+          <div class="lesson-details">
+            <h3>About this lesson</h3>
+            <p>{{ selectedLesson.description }}</p>
+            <div class="lesson-tips">
+               <strong>Pro Tip:</strong> Ensure your hands and face are well-lit and visible to the camera. Open gestures feel more natural.
+            </div>
+          </div>
+        </div>
+
+        <footer class="lesson-actions">
+          <button class="btn cancel" (click)="closeLesson()">Close</button>
+          <button class="btn primary" (click)="markCompleted()" *ngIf="!selectedLesson.completed" [disabled]="isSaving">
+            {{ isSaving ? 'Saving...' : 'Mark as Completed' }}
+          </button>
+          <button class="btn success" (click)="closeLesson()" *ngIf="selectedLesson.completed">
+            ✓ Completed
+          </button>
+        </footer>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+

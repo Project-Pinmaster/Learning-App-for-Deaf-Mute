@@ -5,6 +5,7 @@ const authRoutes = require("./routes/auth.routes");
 const progressRoutes = require("./routes/progress.routes");
 const adminRoutes = require("./routes/admin.routes");
 const usersRoutes = require("./routes/users.routes");
+const voiceToTextRoutes = require("./routes/voiceToText.routes");
 const app = express();
 
 app.use(cors());
@@ -15,5 +16,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/progress", progressRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/users", usersRoutes);
+app.use("/api/voice-to-text", voiceToTextRoutes);
 
 module.exports = app;

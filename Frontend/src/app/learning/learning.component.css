@@ -1,18 +1,72 @@
-.page {
+.learning-page {
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background: var(--bg-1, #f8fafc);
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(135deg, #4da8da 0%, #80d8c3 52%, #f5f5f5 100%);
+  padding: 48px 16px 90px;
+  position: relative;
+  overflow: hidden;
   font-family: inherit;
+}
+
+.floating {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.float {
+  position: absolute;
+  width: 96px;
+  opacity: 0.55;
+  animation: drift 7s ease-in-out infinite;
+  filter: drop-shadow(0 12px 22px rgba(23, 48, 69, 0.18));
+}
+
+.float.f1 { top: 6%; left: 8%; animation-delay: 0s; }
+.float.f2 { top: 10%; right: 10%; animation-delay: 1s; }
+.float.f3 { bottom: 18%; left: 12%; animation-delay: 2s; }
+.float.f4 { bottom: 10%; right: 12%; animation-delay: 3s; }
+.float.f5 { top: 45%; left: 18%; animation-delay: 4s; }
+.float.f6 { top: 38%; right: 18%; animation-delay: 5s; }
+
+@keyframes drift {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-24px) rotate(4deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.lesson-shell {
+  width: min(1280px, 96vw);
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 22px 26px 32px;
+  box-shadow: 0 26px 60px rgba(23, 48, 69, 0.22);
+  position: relative;
+  z-index: 2;
 }
 
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
-  background: white;
+  padding: 0.5rem 0.5rem 1rem;
   border-bottom: 1px solid #e2e8f0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
 }
 
 .brand-name {
@@ -27,6 +81,7 @@
 }
 
 .nav-tabs button {
+  position: relative;
   background: none;
   border: none;
   padding: 0.5rem 1rem;
@@ -35,25 +90,42 @@
   color: #64748b;
   border-radius: 0.375rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s ease;
+}
+
+.nav-tabs button::after {
+  content: '';
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: 0.15rem;
+  height: 3px;
+  background: #ffd66b;
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
 }
 
 .nav-tabs button:hover {
-  background: #f1f5f9;
-  color: #334155;
+  background: transparent;
+  color: #0f172a;
+}
+
+.nav-tabs button:hover::after,
+.nav-tabs button.active::after {
+  transform: scaleX(1);
 }
 
 .nav-tabs button.active {
-  background: #e2e8f0;
+  background: transparent;
   color: #0f172a;
 }
 
 .learning-container {
-  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
-  padding: 3rem 2rem;
-  flex: 1;
+  padding: 2rem 1.5rem 1rem;
 }
 
 .learning-header {
@@ -61,6 +133,7 @@
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 3rem;
+  gap: 16px;
 }
 
 .learning-header h1 {
@@ -77,7 +150,7 @@
 }
 
 .progress-widget {
-  background: white;
+  background: #f8fafc;
   padding: 1.25rem 1.5rem;
   border-radius: 1rem;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05);
@@ -118,13 +191,13 @@
 }
 
 .lesson-card {
-  background: white;
+  background: #ffffff;
   border-radius: 1rem;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+  box-shadow: 0 8px 14px -8px rgb(0 0 0 / 0.15);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
   border: 2px solid transparent;
@@ -133,7 +206,7 @@
 .lesson-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  border-color: #cbd5e1;
+  border-color: #ffd66b;
 }
 
 .lesson-card.completed {
@@ -151,7 +224,7 @@
 
 .badge {
   background: #10b981;
-  color: white;
+  color: #ffffff;
   padding: 0.35rem 0.85rem;
   border-radius: 2rem;
   font-size: 0.8rem;
@@ -211,12 +284,11 @@
 }
 
 .lesson-card.completed .btn.secondary {
-  background: white;
+  background: #ffffff;
   color: #10b981;
   border: 1px solid #10b981;
 }
 
-/* Lesson View Overlay */
 .lesson-view-container {
   position: fixed;
   top: 0;
@@ -228,15 +300,15 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  z-index: 50;
+  z-index: 80;
   backdrop-filter: blur(4px);
 }
 
 .lesson-view {
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
   max-height: 90vh;
-  background: white;
+  background: #ffffff;
   border-radius: 1rem;
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   display: flex;
@@ -267,7 +339,7 @@
 }
 
 .back-btn {
-  background: white;
+  background: #ffffff;
   color: #64748b;
   border: 1px solid #cbd5e1;
   padding: 0.5rem 1rem;
@@ -287,34 +359,12 @@
   overflow-y: auto;
 }
 
-.video-placeholder {
+.lesson-video {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: #1e293b;
   border-radius: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.video-placeholder:hover {
-  opacity: 0.9;
-}
-
-.play-icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  color: #0ea5e9;
-  text-shadow: 0 4px 6px rgba(0,0,0,0.3);
-}
-
-.video-placeholder p {
-  font-size: 1.125rem;
-  font-weight: 500;
+  background: #000000;
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.2);
 }
 
 .lesson-details h3 {
@@ -350,7 +400,7 @@
 
 .btn.primary {
   background: #0ea5e9;
-  color: white;
+  color: #ffffff;
 }
 
 .btn.primary:hover {
@@ -359,15 +409,53 @@
 
 .btn.success {
   background: #10b981;
-  color: white;
+  color: #ffffff;
 }
 
 .btn.cancel {
-  background: white;
+  background: #ffffff;
   color: #64748b;
   border: 1px solid #cbd5e1;
 }
 
 .btn.cancel:hover {
   background: #f1f5f9;
+}
+
+.progress-widget.loading {
+  opacity: 0.85;
+}
+
+.loading-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  .learning-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 700px) {
+  .learning-container {
+    padding: 1.5rem 1rem 0.5rem;
+  }
+
+  .lesson-shell {
+    padding: 16px;
+  }
 }

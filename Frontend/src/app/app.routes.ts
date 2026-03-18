@@ -10,6 +10,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { authGuard } from './auth/auth.guard';
 import { TranslationComponent } from './translation/translation.component';
 import { LearningComponent } from './learning/learning.component';
+import { VoiceToTextComponent } from './voice-to-text/voice-to-text.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'handicap-profile', component: HandicapProfileComponent, canActivate: [authGuard] },
   { path: 'user-profile', component: UserProfileComponent, canActivate: [authGuard] },
   { path: 'translation', component: TranslationComponent, canActivate: [authGuard] },
+  { path: 'voice-to-text', component: VoiceToTextComponent, canActivate: [authGuard] },
   { path: 'learning', component: LearningComponent, canActivate: [authGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
   { path: 'admin', component: AdminDashboardComponent, canActivate: [adminGuard] },

@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -9,6 +9,11 @@ export interface UserProgress {
   progressPercentage: number;
   lastLessonAccessed: string | null;
   practiceWords: string[];
+}
+
+export interface ProgressUpdateRequest {
+  lessonTitle: string;
+  totalLessons?: number;
 }
 
 @Injectable({
@@ -22,6 +27,16 @@ export class ProgressService {
   getUserProgress(userId: string): Observable<{ success: boolean; progress: UserProgress }> {
     return this.http.get<{ success: boolean; progress: UserProgress }>(
       `${this.baseUrl}/api/progress/${userId}`
+    );
+  }
+
+  updateUserProgress(
+    userId: string,
+    payload: ProgressUpdateRequest
+  ): Observable<{ success: boolean; progress: UserProgress }> {
+    return this.http.put<{ success: boolean; progress: UserProgress }>(
+      `${this.baseUrl}/api/progress/${userId}`,
+      payload
     );
   }
 }

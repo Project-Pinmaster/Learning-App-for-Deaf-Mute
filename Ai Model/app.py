@@ -5,6 +5,7 @@ from ultralytics import YOLO
 import numpy as np
 import base64
 import time
+import torch
 
 app = Flask(__name__)
 CORS(app)

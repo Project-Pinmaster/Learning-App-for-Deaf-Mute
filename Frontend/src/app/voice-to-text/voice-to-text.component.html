@@ -1,0 +1,75 @@
+<div class="voice-page">
+  <div class="floating-orbit" aria-hidden="true">
+    <button
+      *ngFor="let item of floatingItems()"
+      class="floating-btn"
+      type="button"
+      [ngStyle]="{ '--x': item.x + 'px', '--y': item.y + 'px', '--delay': item.delay + 's', '--size': item.size + 'px' }"
+    >
+      <img [src]="item.src" alt="" />
+    </button>
+  </div>
+
+  <div class="voice-card">
+    <header class="card-header">
+      <div>
+        <h1>Voice to Text</h1>
+        <p>Speak clearly and review your live transcription below.</p>
+      </div>
+    </header>
+
+    <section class="controls">
+      <button class="btn primary" type="button" (click)="startRecording()" [disabled]="isListening() && !isPaused()">
+        Start Recording
+      </button>
+      <button class="btn" type="button" (click)="stopRecording()" [disabled]="!isListening() && !isPaused()">
+        Stop Recording
+      </button>
+      <button class="btn" type="button" (click)="pauseRecording()" [disabled]="!isListening() || isPaused()">
+        Pause
+      </button>
+      <button class="btn" type="button" (click)="resumeRecording()" [disabled]="!isPaused()">
+        Resume
+      </button>
+    </section>
+
+    <section class="feedback">
+      <div class="waveform" [class.active]="isListening()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="status-text">
+        <div class="status-message">{{ statusMessage() }}</div>
+        <div class="error" *ngIf="errorMessage()">{{ errorMessage() }}</div>
+      </div>
+    </section>
+
+    <section class="transcription">
+      <label for="transcript">Live Transcription</label>
+      <textarea
+        id="transcript"
+        rows="9"
+        [ngModel]="transcript()"
+        (ngModelChange)="transcript.set($event)"
+        placeholder="Start speaking to see text here..."
+      ></textarea>
+    </section>
+
+    <section class="actions">
+      <button class="btn ghost" type="button" (click)="clearText()">Clear Text</button>
+    </section>
+
+    <section class="settings">
+      <h3>Settings</h3>
+      <div class="setting-row">
+        <span>Language</span>
+        <select disabled>
+          <option>English (US)</option>
+        </select>
+      </div>
+    </section>
+  </div>
+</div>

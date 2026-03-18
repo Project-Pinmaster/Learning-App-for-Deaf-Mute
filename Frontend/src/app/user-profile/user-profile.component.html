@@ -1,11 +1,14 @@
 <section class="page">
   <header class="topbar">
-    <div class="brand">
-      <span class="brand-name">SignBuddy</span>
-    </div>
+    <a class="brand-link" routerLink="/" style="text-decoration: none; color: inherit; display: inline-flex; align-items: center;">
+      <div class="brand">
+        <img class="brand-logo" src="/images/logo.png" alt="SignBuddy logo" />
+        <span class="brand-name">SignBuddy</span>
+      </div>
+    </a>
     <nav class="nav-tabs">
       <button class="active" type="button" routerLink="/user-profile">Overview</button>
-      <!-- <button type="button" routerLink="/translation">Translation</button> -->
+      <button type="button" routerLink="/voice-to-text">Voice to Text</button>
       <button type="button" routerLink="/learning">Lessons</button>
     </nav>
     <div class="profile">
@@ -50,7 +53,7 @@
           <h3>Voice to Text</h3>
           <p>Speak naturally and see your words appear instantly.</p>
         </div>
-        <button type="button" class="quick-cta">Voice to Text</button>
+        <button type="button" class="quick-cta" routerLink="/voice-to-text">Voice to Text</button>
       </article>
       <article class="quick-card alt">
         <div class="quick-icon sun">📘</div>
@@ -121,3 +124,7 @@
     </div>
   </section>
 </section>
+
+
+
+
