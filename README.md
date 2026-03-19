@@ -15,4 +15,4 @@
 
 Full documentation is available here:
 
-👉 [View Documentation](Documentation/project-documentation.pdf)
+👉 [View Documentation](Documentation/About-our-project.pdf)
