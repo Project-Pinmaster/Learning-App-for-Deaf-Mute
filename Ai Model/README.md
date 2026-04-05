@@ -1,26 +1,32 @@
-# AI Model – SignBuddy
+# 🤖 AI Model – SignBuddy
 
 This folder contains the AI model used for sign language recognition.
 
-# Requirements
+## 📦 Requirements
 
 Install dependencies using:
 
-# (Optional) Create Virtual Environment
-{
+```
+pip install -r requirements.txt
+```
+
+## (Optional) Create Virtual Environment
+
+```
 python -m venv venv
-venv\Scripts\activate   (Windows)
+venv\Scripts\activate
 pip install -r requirements.txt
-}
+```
 
-pip install -r requirements.txt
+## ▶️ Run the Model
 
-# Run the Model
-
+```
 python app.py
+```
 
-# Server
+## 🌐 Server
 
-Runs on: http://localhost:5000
+Runs on:
+http://localhost:5000
 
 Make sure backend and frontend are running for full functionality.
