@@ -110,10 +110,11 @@ To bridge the communication gap between deaf/mute individuals and the general po
 ---
 
 ## 👥 Team
-Dweep Bariya
-Aditya Chaudhari
-Saptarishi Maurya
-Heiyam Pinky Chanu
+
+- Dweep Bariya  
+- Aditya Chaudhari  
+- Saptarishi Maurya  
+- Heiyam Pinky Chanu
 ---
 
 ## 📄 License
